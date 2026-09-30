@@ -574,7 +574,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .menu-grid {
     grid-template-columns: 1fr;
   }
