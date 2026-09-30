@@ -121,45 +121,57 @@ body {
   transform: translateY(-1px);
 }
 
-/* ===================================================
-   Hero Section & Animation Styling
-   =================================================== */
 .hero-section {
   min-height: 100vh;
+  min-height: 100dvh; /* Adapts dynamically to mobile browser address bars */
   position: relative;
-  padding-top: 100px;
+  padding-top: clamp(80px, 10vh, 140px);
+  padding-bottom: clamp(40px, 6vh, 80px);
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* Prevents layout overflow from floating elements */
 }
 
+/* Layout Container (Assuming Bootstrap/Flexbox Grid) */
 .hero-text-col {
-  padding-left: 6%;
+  padding-left: clamp(0px, 4vw, 6%);
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-title {
   color: var(--title-color);
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(1.8rem, 4vw + 1rem, 3.2rem);
   font-weight: 700;
+  line-height: 1.2;
   margin-bottom: 1.2rem;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .hero-desc {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  max-width: 420px;
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.05rem);
+  line-height: 1.6;
+  max-width: 480px;
+  width: 100%;
   margin-bottom: 1.8rem;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Call-To-Action Button */
 .btn-hero-order {
   background-color: var(--navy-blue);
   color: #ffffff !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
   line-height: 2;
-  padding: 8px 28px;
+  padding: 10px 32px;
   border: none;
-  transition: all 0.3s ease;
+  border-radius: 4px;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
 .btn-hero-order:hover {
@@ -168,18 +180,22 @@ body {
   box-shadow: 0 6px 15px rgba(45, 59, 135, 0.25);
 }
 
+/* Image Container & Floating Animation */
 .hero-image-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 420px;
+  width: 100%;
+  min-height: clamp(260px, 40vh, 480px);
+  position: relative;
   transition: transform 0.1s ease-out;
 }
 
 .hero-food-img {
   width: 100%;
-  max-width: 100%;
-  max-height: 400px;
+  max-width: clamp(240px, 80%, 480px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: contain;
   filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.12));
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -187,6 +203,7 @@ body {
 
 .floating {
   animation: float 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes float {
@@ -198,13 +215,12 @@ body {
   }
 }
 
-/* Carousel Nav Buttons */
+/* Carousel Navigation Buttons */
 .slider-btn {
   position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  top: 50%;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background-color: var(--navy-blue);
   color: #ffffff;
@@ -214,23 +230,31 @@ body {
   justify-content: center;
   z-index: 10;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, left 0.2s ease, bottom 0.2s ease;
 }
 
-.slider-btn:hover {
+/* Default Desktop Positioning (Flanking sides of image box or section) */
+.prev-btn {
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.next-btn {
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.prev-btn:hover {
   background-color: var(--navy-blue-hover);
   transform: translateY(-50%) scale(1.1);
 }
 
-.prev-btn {
-  left: 25px;
+.next-btn:hover {
+  background-color: var(--navy-blue-hover);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.next-btn {
-  right: 25px;
-}
-
-/* Slide Transition Helper Classes */
+/* Slide Transition Classes */
 .fade-out {
   opacity: 0;
   transform: translateY(10px) scale(0.95);
@@ -245,7 +269,7 @@ body {
    Responsive Adjustments
    =================================================== */
 
-/* Medium & Small Screens (Tablets & Mobile - under 992px) */
+/* Tablet & Mobile Screens (Under 992px) */
 @media (max-width: 991.98px) {
   .pill-navbar {
     border-radius: 25px;
@@ -260,65 +284,109 @@ body {
   }
 
   .hero-section {
-    text-align: center;
-    padding-top: 120px;
-    padding-bottom: 80px;
     min-height: auto;
+    text-align: center;
+    padding-top: 110px;
+    padding-bottom: 90px; /* Extra room for bottom slider buttons */
   }
 
   .hero-text-col {
     padding-left: 0;
     margin-bottom: 2rem;
+    align-items: center;
   }
 
   .hero-desc {
-    margin: 0 auto 1.5rem auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .hero-image-box {
-    min-height: 300px;
+  .btn-hero-order {
+    align-self: center;
   }
 
-  .hero-food-img {
-    max-height: 280px;
-  }
-
-  /* Centered button controls on small screens */
+  /* 
+     FIXED: Centered button controls anchored at the bottom using transform & calc.
+     Button Width: 44px, Gap between buttons: 20px
+     Center Offset = (44px / 2) + (20px / 2) = 32px
+  */
   .slider-btn {
     top: auto;
     bottom: 20px;
-    transform: none;
-  }
-
-  .slider-btn:hover {
-    transform: scale(1.1);
+    left: 50%;
+    right: auto;
   }
 
   .prev-btn {
-    left: calc(50% - 50px);
+    left: 50%;
+    right: auto;
+    transform: translateX(calc(-100% - 10px)); /* Shifts left by button width + half gap */
   }
 
   .next-btn {
-    right: calc(50% - 50px);
+    left: 50%;
+    right: auto;
+    transform: translateX(10px); /* Shifts right by half gap */
+  }
+
+  .prev-btn:hover {
+    transform: translateX(calc(-100% - 10px)) scale(1.1);
+  }
+
+  .next-btn:hover {
+    transform: translateX(10px) scale(1.1);
   }
 }
 
-/* Extra Small Screens (Mobile - under 576px) */
+/* Small Mobile Screens (Under 576px) */
 @media (max-width: 575.98px) {
   .hero-section {
-    padding-top: 100px;
+    padding-top: 90px;
   }
 
-  .hero-food-img {
-    max-height: 220px;
+  .slider-btn {
+    width: 38px;
+    height: 38px;
+    bottom: 15px;
   }
 
+  /* 
+     FIXED: Adjusted calculations for 38px buttons with 16px gap
+     Gap half = 8px
+  */
   .prev-btn {
-    left: calc(50% - 55px);
+    left: 50%;
+    right: auto;
+    transform: translateX(calc(-100% - 8px));
   }
 
   .next-btn {
-    right: calc(50% - 55px);
+    left: 50%;
+    right: auto;
+    transform: translateX(8px);
+  }
+
+  .prev-btn:hover {
+    transform: translateX(calc(-100% - 8px)) scale(1.1);
+  }
+
+  .next-btn:hover {
+    transform: translateX(8px) scale(1.1);
+  }
+}
+
+/* Performance Optimization: Reduce motion if preferred by user */
+@media (prefers-reduced-motion: reduce) {
+  .floating {
+    animation: none;
+  }
+  
+  .hero-title,
+  .hero-desc,
+  .hero-food-img,
+  .btn-hero-order,
+  .slider-btn {
+    transition: none;
   }
 }
 
