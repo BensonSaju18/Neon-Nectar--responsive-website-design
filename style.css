@@ -121,25 +121,30 @@ body {
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   HERO SECTION
+   Responsive only for this section
+   ========================================================= */
+
 .hero-section {
   min-height: 100vh;
-  min-height: 100dvh; /* Adapts dynamically to mobile browser address bars */
+  min-height: 100dvh;
   position: relative;
   padding-top: clamp(80px, 10vh, 140px);
   padding-bottom: clamp(40px, 6vh, 80px);
   display: flex;
   align-items: center;
-  overflow: hidden; /* Prevents layout overflow from floating elements */
+  overflow: hidden;
 }
 
-/* Layout Container (Assuming Bootstrap/Flexbox Grid) */
-.hero-text-col {
+/* Hero Text */
+.hero-section .hero-text-col {
   padding-left: clamp(0px, 4vw, 6%);
   display: flex;
   flex-direction: column;
 }
 
-.hero-title {
+.hero-section .hero-title {
   color: var(--title-color);
   font-size: clamp(1.8rem, 4vw + 1rem, 3.2rem);
   font-weight: 700;
@@ -148,7 +153,7 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.hero-desc {
+.hero-section .hero-desc {
   color: var(--text-muted);
   font-size: clamp(0.9rem, 1vw + 0.5rem, 1.05rem);
   line-height: 1.6;
@@ -158,10 +163,10 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Call-To-Action Button */
-.btn-hero-order {
+/* Hero Button */
+.hero-section .btn-hero-order {
   background-color: var(--navy-blue);
-  color: #ffffff !important;
+  color: #fff !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
   line-height: 2;
@@ -170,28 +175,29 @@ body {
   border-radius: 4px;
   align-self: flex-start;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.btn-hero-order:hover {
+.hero-section .btn-hero-order:hover {
   background-color: var(--navy-blue-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(45, 59, 135, 0.25);
 }
 
-/* Image Container & Floating Animation */
-.hero-image-box {
+/* Hero Image */
+.hero-section .hero-image-box {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-height: clamp(260px, 40vh, 480px);
   position: relative;
-  transition: transform 0.1s ease-out;
 }
 
-.hero-food-img {
+.hero-section .hero-food-img {
   width: 100%;
   max-width: clamp(240px, 80%, 480px);
   height: auto;
@@ -201,191 +207,260 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.floating {
-  animation: float 4s ease-in-out infinite;
+/* Floating Animation */
+.hero-section .floating {
+  animation: heroFloat 4s ease-in-out infinite;
   will-change: transform;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
   }
+
   50% {
     transform: translateY(-12px);
   }
 }
 
-/* Carousel Navigation Buttons */
-.slider-btn {
+/* Slider Buttons */
+.hero-section .slider-btn {
   position: absolute;
   top: 50%;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   background-color: var(--navy-blue);
-  color: #ffffff;
+  color: #fff;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease, left 0.2s ease, bottom 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Default Desktop Positioning (Flanking sides of image box or section) */
-.prev-btn {
+.hero-section .prev-btn {
   left: 20px;
   transform: translateY(-50%);
 }
 
-.next-btn {
+.hero-section .next-btn {
   right: 20px;
   transform: translateY(-50%);
 }
 
-.prev-btn:hover {
+.hero-section .prev-btn:hover,
+.hero-section .next-btn:hover {
   background-color: var(--navy-blue-hover);
+}
+
+.hero-section .prev-btn:hover {
   transform: translateY(-50%) scale(1.1);
 }
 
-.next-btn:hover {
-  background-color: var(--navy-blue-hover);
+.hero-section .next-btn:hover {
   transform: translateY(-50%) scale(1.1);
 }
 
-/* Slide Transition Classes */
-.fade-out {
+/* Slide Animation */
+.hero-section .fade-out {
   opacity: 0;
   transform: translateY(10px) scale(0.95);
 }
 
-.fade-in {
+.hero-section .fade-in {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-/* ===================================================
-   Responsive Adjustments
-   =================================================== */
 
-/* Tablet & Mobile Screens (Under 992px) */
+/* =========================================================
+   TABLET
+   992px and below
+   ========================================================= */
+
 @media (max-width: 991.98px) {
-  .pill-navbar {
-    border-radius: 25px;
-  }
-
-  .navbar-collapse {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 20px;
-    margin-top: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  }
 
   .hero-section {
     min-height: auto;
-    text-align: center;
     padding-top: 110px;
-    padding-bottom: 90px; /* Extra room for bottom slider buttons */
+    padding-bottom: 90px;
+    text-align: center;
   }
 
-  .hero-text-col {
+  .hero-section .hero-text-col {
     padding-left: 0;
     margin-bottom: 2rem;
     align-items: center;
   }
 
-  .hero-desc {
+  .hero-section .hero-title {
+    max-width: 700px;
+  }
+
+  .hero-section .hero-desc {
     margin-left: auto;
     margin-right: auto;
   }
 
-  .btn-hero-order {
+  .hero-section .btn-hero-order {
     align-self: center;
   }
 
-  /* 
-     FIXED: Centered button controls anchored at the bottom using transform & calc.
-     Button Width: 44px, Gap between buttons: 20px
-     Center Offset = (44px / 2) + (20px / 2) = 32px
-  */
-  .slider-btn {
+  .hero-section .hero-image-box {
+    min-height: 300px;
+  }
+
+  /* Bottom slider controls */
+  .hero-section .slider-btn {
     top: auto;
     bottom: 20px;
-    left: 50%;
-    right: auto;
   }
 
-  .prev-btn {
+  .hero-section .prev-btn {
     left: 50%;
     right: auto;
-    transform: translateX(calc(-100% - 10px)); /* Shifts left by button width + half gap */
+    transform: translateX(calc(-100% - 10px));
   }
 
-  .next-btn {
+  .hero-section .next-btn {
     left: 50%;
     right: auto;
-    transform: translateX(10px); /* Shifts right by half gap */
+    transform: translateX(10px);
   }
 
-  .prev-btn:hover {
+  .hero-section .prev-btn:hover {
     transform: translateX(calc(-100% - 10px)) scale(1.1);
   }
 
-  .next-btn:hover {
+  .hero-section .next-btn:hover {
     transform: translateX(10px) scale(1.1);
   }
 }
 
-/* Small Mobile Screens (Under 576px) */
+
+/* =========================================================
+   MOBILE
+   576px and below
+   ========================================================= */
+
 @media (max-width: 575.98px) {
+
   .hero-section {
     padding-top: 90px;
+    padding-bottom: 75px;
   }
 
-  .slider-btn {
+  .hero-section .hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-section .hero-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: 95%;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-section .btn-hero-order {
+    font-size: 0.85rem;
+    padding: 9px 25px;
+  }
+
+  .hero-section .hero-image-box {
+    min-height: 240px;
+  }
+
+  .hero-section .hero-food-img {
+    max-width: 85%;
+  }
+
+  /* Mobile slider buttons */
+  .hero-section .slider-btn {
     width: 38px;
     height: 38px;
     bottom: 15px;
   }
 
-  /* 
-     FIXED: Adjusted calculations for 38px buttons with 16px gap
-     Gap half = 8px
-  */
-  .prev-btn {
+  .hero-section .prev-btn {
     left: 50%;
     right: auto;
     transform: translateX(calc(-100% - 8px));
   }
 
-  .next-btn {
+  .hero-section .next-btn {
     left: 50%;
     right: auto;
     transform: translateX(8px);
   }
 
-  .prev-btn:hover {
+  .hero-section .prev-btn:hover {
     transform: translateX(calc(-100% - 8px)) scale(1.1);
   }
 
-  .next-btn:hover {
+  .hero-section .next-btn:hover {
     transform: translateX(8px) scale(1.1);
   }
 }
 
-/* Performance Optimization: Reduce motion if preferred by user */
+
+/* =========================================================
+   VERY SMALL MOBILE
+   400px and below
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .hero-section {
+    padding-top: 80px;
+    padding-bottom: 70px;
+  }
+
+  .hero-section .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero-section .hero-desc {
+    font-size: 0.88rem;
+  }
+
+  .hero-section .hero-image-box {
+    min-height: 210px;
+  }
+
+  .hero-section .hero-food-img {
+    max-width: 90%;
+  }
+
+  .hero-section .slider-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
-  .floating {
+
+  .hero-section .floating {
     animation: none;
   }
-  
-  .hero-title,
-  .hero-desc,
-  .hero-food-img,
-  .btn-hero-order,
-  .slider-btn {
+
+  .hero-section .hero-title,
+  .hero-section .hero-desc,
+  .hero-section .hero-food-img,
+  .hero-section .btn-hero-order,
+  .hero-section .slider-btn {
     transition: none;
   }
 }
