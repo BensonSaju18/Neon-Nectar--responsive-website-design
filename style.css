@@ -123,159 +123,950 @@ body {
 
 /* =========================================================
    HERO SECTION
-   Responsive only for this section
+   Smart Cinematic Food Animation
    ========================================================= */
 
 .hero-section {
+
   min-height: 100vh;
   min-height: 100dvh;
+
   position: relative;
+
   padding-top: clamp(80px, 10vh, 140px);
   padding-bottom: clamp(40px, 6vh, 80px);
+
   display: flex;
   align-items: center;
+
   overflow: hidden;
+
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 75% 50%,
+      rgba(45, 59, 135, 0.18),
+      transparent 35%
+    );
 }
 
-/* Hero Text */
-.hero-section .hero-text-col {
-  padding-left: clamp(0px, 4vw, 6%);
-  display: flex;
-  flex-direction: column;
+
+/* =========================================================
+   BACKGROUND LIGHT
+   ========================================================= */
+
+.hero-section::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  top: -250px;
+  right: -150px;
+
+  background:
+    rgba(45, 59, 135, 0.12);
+
+  filter: blur(90px);
+
+  z-index: -3;
+
+  animation:
+    backgroundFloat 8s ease-in-out infinite alternate;
 }
+
+
+.hero-section::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  border-radius: 50%;
+
+  bottom: -180px;
+  left: -120px;
+
+  background:
+    rgba(45, 59, 135, 0.08);
+
+  filter: blur(80px);
+
+  z-index: -3;
+
+  animation:
+    backgroundFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+
+@keyframes backgroundFloat {
+
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+
+/* =========================================================
+   BOKEH
+   ========================================================= */
+
+.hero-bokeh {
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  filter: blur(2px);
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  animation:
+    bokehFloat 6s ease-in-out infinite;
+}
+
+
+.bokeh-1 {
+
+  width: 80px;
+  height: 80px;
+
+  right: 12%;
+  top: 15%;
+}
+
+
+.bokeh-2 {
+
+  width: 25px;
+  height: 25px;
+
+  right: 35%;
+  top: 20%;
+
+  animation-delay: 1s;
+}
+
+
+.bokeh-3 {
+
+  width: 55px;
+  height: 55px;
+
+  right: 5%;
+  bottom: 20%;
+
+  animation-delay: 2s;
+}
+
+
+.bokeh-4 {
+
+  width: 20px;
+  height: 20px;
+
+  left: 35%;
+  bottom: 15%;
+
+  animation-delay: 3s;
+}
+
+
+@keyframes bokehFloat {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    opacity: 0.3;
+  }
+
+  50% {
+
+    transform:
+      translateY(-25px)
+      scale(1.15);
+
+    opacity: 0.75;
+  }
+}
+
+
+/* =========================================================
+   HERO TEXT
+   ========================================================= */
+
+.hero-section .hero-text-col {
+
+  padding-left:
+    clamp(0px, 4vw, 6%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* Category */
+
+.hero-category {
+
+  display: inline-block;
+
+  width: fit-content;
+
+  margin-bottom: 15px;
+
+  padding: 6px 12px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(45, 59, 135, 0.08);
+
+  color:
+    var(--navy-blue);
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+/* Title */
 
 .hero-section .hero-title {
+
   color: var(--title-color);
-  font-size: clamp(1.8rem, 4vw + 1rem, 3.2rem);
+
+  font-size:
+    clamp(1.8rem, 4vw + 1rem, 3.2rem);
+
   font-weight: 700;
+
   line-height: 1.2;
+
   margin-bottom: 1.2rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
+
+
+/* Description */
 
 .hero-section .hero-desc {
+
   color: var(--text-muted);
-  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.05rem);
+
+  font-size:
+    clamp(0.9rem, 1vw + 0.5rem, 1.05rem);
+
   line-height: 1.6;
+
   max-width: 480px;
+
   width: 100%;
-  margin-bottom: 1.8rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  margin-bottom: 1rem;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
-/* Hero Button */
-.hero-section .btn-hero-order {
-  background-color: var(--navy-blue);
-  color: #fff !important;
-  font-family: Arial, Helvetica, sans-serif;
+
+/* =========================================================
+   PRICE
+   ========================================================= */
+
+.hero-price {
+
+  font-size: 1.5rem;
+
+  font-weight: 800;
+
+  color:
+    var(--navy-blue);
+
+  margin-bottom: 18px;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+/* =========================================================
+   NUTRITION
+   ========================================================= */
+
+.nutrition-box {
+
+  display: flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 10px 15px;
+
+  margin-bottom: 25px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.65);
+
+  border:
+    1px solid rgba(45, 59, 135, 0.08);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.05);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+.nutrition-item {
+
+  display: flex;
+
+  flex-direction: column;
+
+  text-align: center;
+
+  padding: 0 12px;
+}
+
+
+.nutrition-item strong {
+
   font-size: 0.9rem;
+
+  color:
+    var(--title-color);
+}
+
+
+.nutrition-item span {
+
+  font-size: 0.65rem;
+
+  color:
+    var(--text-muted);
+
+  margin-top: 2px;
+}
+
+
+.nutrition-line {
+
+  width: 1px;
+
+  height: 25px;
+
+  background:
+    rgba(45, 59, 135, 0.15);
+}
+
+
+/* =========================================================
+   HERO BUTTON
+   ========================================================= */
+
+.hero-section .btn-hero-order {
+
+  position: relative;
+
+  overflow: hidden;
+
+  background-color:
+    var(--navy-blue);
+
+  color: #fff !important;
+
+  font-family:
+    Arial, Helvetica, sans-serif;
+
+  font-size: 0.9rem;
+
   line-height: 2;
-  padding: 10px 32px;
+
+  padding: 10px 25px;
+
   border: none;
-  border-radius: 4px;
+
+  border-radius: 6px;
+
   align-self: flex-start;
+
   cursor: pointer;
+
   transition:
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
+
+.hero-section .btn-hero-order::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -120%;
+
+  width: 80%;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.35),
+      transparent
+    );
+
+  transform:
+    skewX(-25deg);
+
+  transition:
+    left 0.6s ease;
+}
+
+
+.hero-section .btn-hero-order:hover::before {
+
+  left: 130%;
+}
+
+
 .hero-section .btn-hero-order:hover {
-  background-color: var(--navy-blue-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(45, 59, 135, 0.25);
+
+  background-color:
+    var(--navy-blue-hover);
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 10px 25px
+    rgba(45, 59, 135, 0.3);
 }
 
-/* Hero Image */
+
+.button-arrow {
+
+  display: inline-block;
+
+  margin-left: 8px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.btn-hero-order:hover .button-arrow {
+
+  transform:
+    translateX(5px);
+}
+
+
+/* =========================================================
+   HERO IMAGE AREA
+   ========================================================= */
+
 .hero-section .hero-image-box {
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
+
   width: 100%;
-  min-height: clamp(260px, 40vh, 480px);
+
+  min-height:
+    clamp(260px, 40vh, 480px);
+
   position: relative;
+
+  perspective: 1000px;
 }
 
-.hero-section .hero-food-img {
-  width: 100%;
-  max-width: clamp(240px, 80%, 480px);
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.12));
-  transition: opacity 0.3s ease, transform 0.3s ease;
+
+/* =========================================================
+   FOOD GLOW
+   ========================================================= */
+
+.food-glow {
+
+  position: absolute;
+
+  width:
+    clamp(230px, 35vw, 420px);
+
+  height:
+    clamp(230px, 35vw, 420px);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(45, 59, 135, 0.16),
+      transparent 65%
+    );
+
+  filter: blur(15px);
+
+  animation:
+    foodGlow 4s ease-in-out infinite;
 }
 
-/* Floating Animation */
-.hero-section .floating {
-  animation: heroFloat 4s ease-in-out infinite;
-  will-change: transform;
-}
 
-@keyframes heroFloat {
+@keyframes foodGlow {
+
   0%,
   100% {
-    transform: translateY(0);
+
+    transform:
+      scale(0.95);
+
+    opacity: 0.6;
   }
 
   50% {
-    transform: translateY(-12px);
+
+    transform:
+      scale(1.08);
+
+    opacity: 1;
   }
 }
 
-/* Slider Buttons */
-.hero-section .slider-btn {
+
+/* =========================================================
+   HERO FOOD IMAGE
+   ========================================================= */
+
+.hero-section .hero-food-img {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  max-width:
+    clamp(240px, 80%, 480px);
+
+  height: auto;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 25px 30px rgba(0,0,0,0.18)
+    );
+
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    filter 0.4s ease;
+}
+
+
+/* =========================================================
+   FLOATING ANIMATION
+   ========================================================= */
+
+.hero-section .floating {
+
+  animation:
+    heroFloat 5s ease-in-out infinite;
+
+  will-change:
+    transform;
+}
+
+
+@keyframes heroFloat {
+
+  0%,
+  100% {
+
+    transform:
+      translateY(0)
+      rotate(-1deg);
+  }
+
+  25% {
+
+    transform:
+      translateY(-8px)
+      rotate(1deg);
+  }
+
+  50% {
+
+    transform:
+      translateY(-18px)
+      rotate(-1deg);
+  }
+
+  75% {
+
+    transform:
+      translateY(-8px)
+      rotate(1deg);
+  }
+}
+
+
+/* =========================================================
+   STEAM
+   ========================================================= */
+
+.steam {
+
   position: absolute;
-  top: 50%;
-  width: 44px;
-  height: 44px;
+
+  width: 12px;
+
+  height: 65px;
+
+  border-left:
+    2px solid rgba(255,255,255,0.3);
+
   border-radius: 50%;
-  background-color: var(--navy-blue);
+
+  filter: blur(2px);
+
+  opacity: 0;
+
+  z-index: 7;
+
+  animation:
+    steamRise 4s ease-in-out infinite;
+}
+
+
+.steam-1 {
+
+  left: 45%;
+
+  top: 22%;
+}
+
+
+.steam-2 {
+
+  left: 52%;
+
+  top: 25%;
+
+  animation-delay:
+    1.2s;
+}
+
+
+.steam-3 {
+
+  left: 58%;
+
+  top: 23%;
+
+  animation-delay:
+    2.2s;
+}
+
+
+@keyframes steamRise {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translateY(20px)
+      scaleX(0.7);
+  }
+
+  30% {
+
+    opacity: 0.35;
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translateY(-80px)
+      translateX(20px)
+      scaleX(1.5);
+  }
+}
+
+
+/* =========================================================
+   FOOD SHADOW
+   ========================================================= */
+
+.food-shadow {
+
+  position: absolute;
+
+  bottom: 8%;
+
+  width: 280px;
+
+  height: 30px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0,0,0,0.16);
+
+  filter: blur(15px);
+
+  animation:
+    shadowAnimation 5s ease-in-out infinite;
+}
+
+
+@keyframes shadowAnimation {
+
+  0%,
+  100% {
+
+    transform:
+      scale(1);
+
+    opacity: 0.5;
+  }
+
+  50% {
+
+    transform:
+      scale(0.72);
+
+    opacity: 0.25;
+  }
+}
+
+
+/* =========================================================
+   3D TILT
+   ========================================================= */
+
+.hero-image-box.tilting .hero-food-img {
+
+  animation:
+    none;
+
+  transition:
+    transform 0.1s ease-out;
+}
+
+
+/* =========================================================
+   SLIDER BUTTONS
+   ========================================================= */
+
+.hero-section .slider-btn {
+
+  position: absolute;
+
+  top: 50%;
+
+  width: 44px;
+
+  height: 44px;
+
+  border-radius: 50%;
+
+  background:
+    var(--navy-blue);
+
   color: #fff;
+
   border: none;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   z-index: 10;
+
   cursor: pointer;
+
   transition:
     background-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
 
 .hero-section .prev-btn {
+
   left: 20px;
-  transform: translateY(-50%);
+
+  transform:
+    translateY(-50%);
 }
 
+
 .hero-section .next-btn {
+
   right: 20px;
-  transform: translateY(-50%);
+
+  transform:
+    translateY(-50%);
 }
+
 
 .hero-section .prev-btn:hover,
 .hero-section .next-btn:hover {
-  background-color: var(--navy-blue-hover);
+
+  background-color:
+    var(--navy-blue-hover);
+
+  box-shadow:
+    0 8px 20px
+    rgba(45,59,135,0.25);
 }
+
 
 .hero-section .prev-btn:hover {
-  transform: translateY(-50%) scale(1.1);
+
+  transform:
+    translateY(-50%)
+    scale(1.1);
 }
+
 
 .hero-section .next-btn:hover {
-  transform: translateY(-50%) scale(1.1);
+
+  transform:
+    translateY(-50%)
+    scale(1.1);
 }
 
-/* Slide Animation */
-.hero-section .fade-out {
-  opacity: 0;
-  transform: translateY(10px) scale(0.95);
+
+/* =========================================================
+   SLIDE OUT
+   ========================================================= */
+
+.hero-section .slide-out {
+
+  opacity: 0 !important;
+
+  transform:
+    translateY(25px)
+    scale(0.92) !important;
 }
 
-.hero-section .fade-in {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+
+/* =========================================================
+   PROGRESS DOTS
+   ========================================================= */
+
+.hero-progress {
+
+  position: absolute;
+
+  bottom: 25px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  gap: 7px;
+
+  z-index: 20;
+}
+
+
+.hero-progress-dot {
+
+  width: 25px;
+
+  height: 4px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(45,59,135,0.2);
+
+  cursor: pointer;
+
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+
+.hero-progress-dot.active {
+
+  width: 48px;
+
+  background:
+    var(--navy-blue);
 }
 
 
@@ -287,59 +1078,120 @@ body {
 @media (max-width: 991.98px) {
 
   .hero-section {
+
     min-height: auto;
+
     padding-top: 110px;
-    padding-bottom: 90px;
+
+    padding-bottom: 100px;
+
     text-align: center;
   }
 
+
   .hero-section .hero-text-col {
+
     padding-left: 0;
+
     margin-bottom: 2rem;
+
     align-items: center;
   }
 
-  .hero-section .hero-title {
-    max-width: 700px;
-  }
 
-  .hero-section .hero-desc {
+  .hero-category {
+
     margin-left: auto;
+
     margin-right: auto;
   }
 
+
+  .hero-section .hero-title {
+
+    max-width: 700px;
+  }
+
+
+  .hero-section .hero-desc {
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+
   .hero-section .btn-hero-order {
+
     align-self: center;
   }
 
+
+  .nutrition-box {
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+
   .hero-section .hero-image-box {
+
     min-height: 300px;
   }
 
+
   /* Bottom slider controls */
+
   .hero-section .slider-btn {
+
     top: auto;
+
     bottom: 20px;
   }
 
+
   .hero-section .prev-btn {
+
     left: 50%;
+
     right: auto;
-    transform: translateX(calc(-100% - 10px));
+
+    transform:
+      translateX(calc(-100% - 10px));
   }
+
 
   .hero-section .next-btn {
+
     left: 50%;
+
     right: auto;
-    transform: translateX(10px);
+
+    transform:
+      translateX(10px);
   }
+
 
   .hero-section .prev-btn:hover {
-    transform: translateX(calc(-100% - 10px)) scale(1.1);
+
+    transform:
+      translateX(calc(-100% - 10px))
+      scale(1.1);
   }
 
+
   .hero-section .next-btn:hover {
-    transform: translateX(10px) scale(1.1);
+
+    transform:
+      translateX(10px)
+      scale(1.1);
+  }
+
+
+  .hero-progress {
+
+    bottom: 75px;
   }
 }
 
@@ -352,95 +1204,183 @@ body {
 @media (max-width: 575.98px) {
 
   .hero-section {
+
     padding-top: 90px;
-    padding-bottom: 75px;
+
+    padding-bottom: 85px;
   }
 
+
   .hero-section .hero-title {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
+
+    font-size:
+      clamp(1.8rem, 8vw, 2.4rem);
+
     line-height: 1.2;
+
     margin-bottom: 1rem;
   }
 
+
   .hero-section .hero-desc {
+
     font-size: 0.92rem;
+
     line-height: 1.55;
+
     max-width: 95%;
-    margin-bottom: 1.4rem;
+
+    margin-bottom: 1rem;
   }
 
+
+  .hero-price {
+
+    font-size: 1.3rem;
+  }
+
+
+  .nutrition-box {
+
+    padding: 8px 10px;
+  }
+
+
+  .nutrition-item {
+
+    padding: 0 8px;
+  }
+
+
+  .nutrition-item strong {
+
+    font-size: 0.8rem;
+  }
+
+
+  .nutrition-item span {
+
+    font-size: 0.58rem;
+  }
+
+
   .hero-section .btn-hero-order {
+
     font-size: 0.85rem;
+
     padding: 9px 25px;
   }
 
+
   .hero-section .hero-image-box {
+
     min-height: 240px;
   }
 
+
   .hero-section .hero-food-img {
+
     max-width: 85%;
   }
 
-  /* Mobile slider buttons */
+
   .hero-section .slider-btn {
+
     width: 38px;
+
     height: 38px;
+
     bottom: 15px;
   }
 
+
   .hero-section .prev-btn {
+
     left: 50%;
+
     right: auto;
-    transform: translateX(calc(-100% - 8px));
+
+    transform:
+      translateX(calc(-100% - 8px));
   }
+
 
   .hero-section .next-btn {
+
     left: 50%;
+
     right: auto;
-    transform: translateX(8px);
+
+    transform:
+      translateX(8px);
   }
+
 
   .hero-section .prev-btn:hover {
-    transform: translateX(calc(-100% - 8px)) scale(1.1);
+
+    transform:
+      translateX(calc(-100% - 8px))
+      scale(1.1);
   }
 
+
   .hero-section .next-btn:hover {
-    transform: translateX(8px) scale(1.1);
+
+    transform:
+      translateX(8px)
+      scale(1.1);
+  }
+
+
+  .hero-progress {
+
+    bottom: 65px;
   }
 }
 
 
 /* =========================================================
    VERY SMALL MOBILE
-   400px and below
    ========================================================= */
 
 @media (max-width: 400px) {
 
   .hero-section {
+
     padding-top: 80px;
-    padding-bottom: 70px;
+
+    padding-bottom: 75px;
   }
 
+
   .hero-section .hero-title {
+
     font-size: 1.7rem;
   }
 
+
   .hero-section .hero-desc {
+
     font-size: 0.88rem;
   }
 
+
   .hero-section .hero-image-box {
+
     min-height: 210px;
   }
 
+
   .hero-section .hero-food-img {
+
     max-width: 90%;
   }
 
+
   .hero-section .slider-btn {
+
     width: 36px;
+
     height: 36px;
   }
 }
@@ -452,16 +1392,13 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
 
-  .hero-section .floating {
-    animation: none;
-  }
+  .hero-section *,
+  .hero-section *::before,
+  .hero-section *::after {
 
-  .hero-section .hero-title,
-  .hero-section .hero-desc,
-  .hero-section .hero-food-img,
-  .hero-section .btn-hero-order,
-  .hero-section .slider-btn {
-    transition: none;
+    animation: none !important;
+
+    transition: none !important;
   }
 }
 
